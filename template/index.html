@@ -6,7 +6,7 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 <script	src="addressbook.js"></script>
 
-<title>郵便番号から住所を得る</title>
+<title>お客様情報管理</title>
 
 </head>
 <body ng-controller="zipCode2Address">
@@ -38,9 +38,17 @@
 				<label for="message"><span></span></label>
 				<input class="telno" name="telno2" type="text" ng-model="telno2" ng-init="telno2=''" >
 			</p>
+			<p>
+				<label for="message"><span></span></label>
+				<button ng-click="onClickReadPerson()">　　読み出し　　</button>
+				<button ng-click="onClickAddPerson()">　　追　加　　</button>
+				<button ng-click="onClickModifyPerson()">　　修　正　　</button>
+				<button ng-click="onClickDeletePerson()">　　削　除　　</button>
+				<button ng-click="onClickCLearPerson()">　　ク　リ　ア　　</button>
+		</p>
 		</fieldset>
-
 		</form>
+		<span><b style="color:#c00">＊</b>は必須項目です。</span>
 	<div>{{result}}</div>
 	<div>
 	{{pref}}

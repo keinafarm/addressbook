@@ -1,7 +1,9 @@
 angular.module('myApp', [] )
   .controller( 'zipCode2Address',
   [ '$scope', '$http', function($scope, $http){
-    　 $scope.zipcode = "";
+      //
+      //  郵便番号から住所を得る
+      //
       $scope.onClickGetAddress = function() {
         // 全角だったら半角に変換
         zipcode = toHalfWidth($scope.zipcode);
@@ -26,10 +28,10 @@ angular.module('myApp', [] )
           code = data.code;
           if (code==200) {
             $scope.result = data.data;
-            $scope.pref = data.data.pref;
-            $scope.address = data.data.address;
-            $scope.city = data.data.city;
-            $scope.town = data.data.town;
+//            $scope.pref = data.data.pref;
+//            $scope.address = data.data.address;
+//            $scope.city = data.data.city;
+//            $scope.town = data.data.town;
             $scope.address1 = data.data.fullAddress;
             $scope.address2 = "";
           }
@@ -40,6 +42,67 @@ angular.module('myApp', [] )
         .error( function(data,status,headers,config ){
           $scope.result = "通信失敗";
         });
+      };
+      //
+      //  表示されている顧客情報を追加する
+      //
+      $scope.onClickReadPerson = function() {
+          $scope.address2 = "onClickReadPerson";
+      };
+      //
+      //  表示されている顧客情報を追加する
+      //
+      $scope.onClickAddPerson = function() {
+        if ($scope.addressbook.$invalid)
+        {
+          $scope.address1 = "データ不正";
+        }
+        else {
+          sendData = JSON.stringify({
+            command:"add",
+            name_rubi:$scope.name_rubi,
+            name_kanji:$scope.name_kanji,
+            zipcode:$scope.zipcode,
+            address1:$scope.address1,
+            address2:$scope.address2,
+            telno1:$scope.telno1,
+            telno2:$scope.telno2,
+          });
+          $http.post( 'addressbook', sendData )	// POSTで送信
+            // 成功時の処理（受信データを表示）
+            .success(function(rcvData, status, headers, config){
+              $scope.result = rcvData;
+            })
+            // 失敗時の処理（ページにエラーメッセージを反映）
+            .error(function(data, status, headers, config){
+              $scope.result = '通信失敗！';
+            });
+          $scope.address2 = "onClickAddPerson";
+      };
+      //
+      //  表示されている顧客情報で更新する
+      //
+      $scope.onClickModifyPerson = function() {
+        $scope.address2 = "onClickModifyPerson";
+      };
+      //
+      //  表示されている顧客情報を削除する
+      //
+      $scope.onClickDeletePerson = function() {
+        $scope.address2 = "onClickDeletePerson";
+      };
+      //
+      //  入力内容をクリアする
+      //
+      $scope.onClickCLearPerson = function() {
+        $scope.key = "";
+        $scope.name_rubi = "";
+        $scope.name_kanji = "";
+        $scope.zipcode = "";
+        $scope.address1 = "";
+        $scope.address2 = "";
+        $scope.telno1 = "";
+        $scope.telno2 = "";
       };
     }
   ]

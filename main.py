@@ -20,9 +20,35 @@ def rootPage():
 
 #
 #-------------------------------------------------------
+#    お客様情報の管理
+#-------------------------------------------------------
+#
+@app.route('/addressbook', methods=(['post']) )
+def addressbook():
+    """
+    """
+    content_body_dict = json.loads(request.data)    # 受信メッセージをJSONで解釈してDICTオブジェクトに
+    print "Key List(received)="
+    print request.form.keys()               # Debug用 受信messageのキー一覧を出力
+    print "Dict Obj(parsed)="
+    print content_body_dict.keys()          # JSONを解釈したオブジェクトのキー一覧を出力
+
+    response = jsonify(content_body_dict)   # JSON化
+    response.status_code = 200
+    return response
+#
+#-------------------------------------------------------
 #    GET/POSTのテスト
 #-------------------------------------------------------
 #
+
+
+
+
+
+
+
+
 @app.route('/getTest', methods=(['get'] ))
 def getTest():
     """
