@@ -19,10 +19,6 @@ form.addressbook p {
 	border-bottom: 2px solid #FFF;
 	font-size: 12px;
 	background: #FFC;
-	/*background-gradient*/
-	background: -moz-linear-gradient(top, #FFC, #F9F9C9);
-	background: -webkit-linear-gradient(top, #FFC, #F9F9C9);
-	background: linear-gradient(#FFC, #F9F9C9);
 }
 form.addressbook p span {
 	display: inline-block;
@@ -44,13 +40,9 @@ form.addressbook p input, select, textarea, button {
 	border:none;
 	/*テキストエリア内にシャドウをつける。最初にbackground初期化が必要*/
     background: #fff;
-	-webkit-box-shadow: 2px 3px 5px -2px #CCC inset;
-	-moz-box-shadow: 2px 3px 5px -2px #CCC inset;
 	box-shadow: 2px 3px 5px -2px #CCC inset;
 	/*角丸にする*/
 	border-radius:9px;
-	-webkit-border-radius:9px;
-	-moz-border-radius:9px;
 }
 form.addressbook p label {
 	margin-right:1em;

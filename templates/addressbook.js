@@ -1,4 +1,4 @@
-angular.module('myApp', [] )
+angular.module('myApp',[] )
   .controller( 'zipCode2Address',
   [ '$scope', '$http', function($scope, $http){
       //
@@ -68,7 +68,11 @@ angular.module('myApp', [] )
             telno1:$scope.telno1,
             telno2:$scope.telno2,
           });
-          $http.post( 'addressbook', sendData )	// POSTで送信
+          $http({
+            method: 'POST',
+            url: '/addressbook',
+            data: sendData
+          })	// POSTで送信
             // 成功時の処理（受信データを表示）
             .success(function(rcvData, status, headers, config){
               $scope.result = rcvData;
@@ -78,6 +82,7 @@ angular.module('myApp', [] )
               $scope.result = '通信失敗！';
             });
           $scope.address2 = "onClickAddPerson";
+        }
       };
       //
       //  表示されている顧客情報で更新する
