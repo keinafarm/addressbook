@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/baseStyle.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+<script	src="zipcode.js"></script>
+
+<title>郵便番号から住所を得る</title>
+
+</head>
+<body ng-controller="zipCode2Address">
+	<div class="goBase">
+		<form name="zipcode">
+			<label for="message">郵便番号：</label>
+			<input id="message" name="zipcode" type="text" ng-model="zipcode" ng-init="zipcode=''" >
+			<button ng-click="onClickGetAddress()">郵便番号=>住所</button>
+			<div><input id="message" name="fullAddress"	type="text" ng-model="fullAddress" ></div>
+			</br>
+		</form>
+	</div>
+	<div>{{result}}</div>
+	<div>
+	{{pref}}
+	{{address}}
+	{{city}}
+	{{town}}
+	{{fullAddress}}
+</body>
+</html>
