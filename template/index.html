@@ -4,21 +4,43 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/baseStyle.css">
 <script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-<script	src="zipcode.js"></script>
+<script	src="addressbook.js"></script>
 
 <title>郵便番号から住所を得る</title>
 
 </head>
 <body ng-controller="zipCode2Address">
-	<div class="goBase">
-		<form name="zipcode">
-			<label for="message">郵便番号：</label>
-			<input id="message" name="zipcode" type="text" ng-model="zipcode" ng-init="zipcode=''" >
-			<button ng-click="onClickGetAddress()">郵便番号=>住所</button>
-			<div><input id="message" name="fullAddress"	type="text" ng-model="fullAddress" ></div>
-			</br>
+		<form name="addressbook" class="addressbook"  enctype="multipart/form-data" >
+			<fieldset>
+				<legend>お客様情報</legend>
+				<p>
+				<label for="name_rubi"><span><sup>＊</sup>フリガナ：</span></label>
+				<input class="name" name="name_rubi" type="text" ng-model="name_rubi" ng-init="name_rubi=''" required />
+				</p>
+				<p>
+				<label for="name_kanji"><span><sup>＊</sup>氏名：</span></label>
+				<input class="name" name="name_kanji" type="text" ng-model="name_kanji" ng-init="name_kanji=''"  required />
+			</p>
+			<p>
+				<label for="zipcode"><span>郵便番号：</span></label>
+				<input class="zipcode" name="zipcode" type="text" ng-model="zipcode" ng-init="zipcode=''" >
+				<button ng-click="onClickGetAddress()">郵便番号=>住所</button>
+			</p>
+			<p>
+				<label for="address"><span>住　　所：</span></label>
+				<input class="address" name="address1" type="text" ng-model="address1" ><br>
+				<label for="address"><span> </span></label>
+				<input class="address" name="address2" type="text" ng-model="address2" >
+			</p>
+			<p>
+				<label for="message"><span>電話番号：</span></label>
+				<input class="telno" name="telno1" type="text" ng-model="telno1" ng-init="telno1=''" ><br>
+				<label for="message"><span></span></label>
+				<input class="telno" name="telno2" type="text" ng-model="telno2" ng-init="telno2=''" >
+			</p>
+		</fieldset>
+
 		</form>
-	</div>
 	<div>{{result}}</div>
 	<div>
 	{{pref}}

@@ -1,0 +1,83 @@
+@charset "utf-8";
+
+/*form_CSS*/
+form.addressbook fieldset {
+	border:dotted 1px #0CF;
+	padding:10px;
+	margin-bottom:1em;
+}
+form.addressbook fieldset legend {
+	font-size: 12px;
+	font-weight: bold;
+	color: #9CF;
+}
+
+/*P_CSS*/
+form.addressbook p {
+	margin:0px;
+	padding:10px;
+	border-bottom: 2px solid #FFF;
+	font-size: 12px;
+	background: #FFC;
+	/*background-gradient*/
+	background: -moz-linear-gradient(top, #FFC, #F9F9C9);
+	background: -webkit-linear-gradient(top, #FFC, #F9F9C9);
+	background: linear-gradient(#FFC, #F9F9C9);
+}
+form.addressbook p span {
+	display: inline-block;
+	/*IE用スターハック*/
+    *display: inline;
+    *zoom: 1;
+	width: 170px;
+	text-align: right;
+	padding-right:1em;
+	margin:0px;
+}
+form.addressbook p span sup {
+	color: #c00;
+}
+form.addressbook p input, select, textarea, button {
+	padding:3px 5px;
+	margin:0px;
+	color:#666;
+	border:none;
+	/*テキストエリア内にシャドウをつける。最初にbackground初期化が必要*/
+    background: #fff;
+	-webkit-box-shadow: 2px 3px 5px -2px #CCC inset;
+	-moz-box-shadow: 2px 3px 5px -2px #CCC inset;
+	box-shadow: 2px 3px 5px -2px #CCC inset;
+	/*角丸にする*/
+	border-radius:9px;
+	-webkit-border-radius:9px;
+	-moz-border-radius:9px;
+}
+form.addressbook p label {
+	margin-right:1em;
+}
+form.addressbook p label input {
+	margin-right:0.5em;
+}
+form.addressbook p textarea {
+	color:#666;
+	font-size:12px;
+	font-weight:normal;
+}
+form.addressbook p button {
+	background-color: #eeeeee;
+	color: #666;
+	font-size:12px;
+	font-weight:normal;
+}
+form.addressbook input.name {
+	width: 150px;
+}
+form.addressbook input.zipcode {
+	width: 80px;
+}
+form.addressbook input.address {
+	width: 300px;
+}
+form.addressbook input.telno {
+	width: 120px;
+}

@@ -30,7 +30,8 @@ angular.module('myApp', [] )
             $scope.address = data.data.address;
             $scope.city = data.data.city;
             $scope.town = data.data.town;
-            $scope.fullAddress = data.data.fullAddress;
+            $scope.address1 = data.data.fullAddress;
+            $scope.address2 = "";
           }
           else {
             $scope.result = "住所不明";
