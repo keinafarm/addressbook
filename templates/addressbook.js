@@ -28,10 +28,10 @@ angular.module('myApp',[] )
           code = data.code;
           if (code==200) {
             $scope.result = data.data;
-//            $scope.pref = data.data.pref;
-//            $scope.address = data.data.address;
-//            $scope.city = data.data.city;
-//            $scope.town = data.data.town;
+            $scope.pref = data.data.pref;
+            $scope.address = data.data.address;
+            $scope.city = data.data.city;
+            $scope.town = data.data.town;
             $scope.address1 = data.data.fullAddress;
             $scope.address2 = "";
           }
@@ -76,6 +76,7 @@ angular.module('myApp',[] )
             // 成功時の処理（受信データを表示）
             .success(function(rcvData, status, headers, config){
               $scope.result = rcvData;
+              $scope.pref  = "応答受信";
             })
             // 失敗時の処理（ページにエラーメッセージを反映）
             .error(function(data, status, headers, config){

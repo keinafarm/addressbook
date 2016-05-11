@@ -12,9 +12,11 @@ class MyPage(webapp2.RequestHandler):
     def get(self):
         logging.info('MyPage.get')
 
-        template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'templates/index.html')
-        self.response.out.write(template.render(path, template_values))
+        clientSource = open('templates/index.html').read()
+        self.response.out.write( clientSource )
+#        template_values = {}
+#        path = os.path.join(os.path.dirname(__file__), 'templates/index.html')
+#        self.response.out.write(template.render(path, template_values))
 
 app  = webapp2.WSGIApplication([('/', MyPage),('/addressbook', addressbook.AddressBook)], debug=True)
 
