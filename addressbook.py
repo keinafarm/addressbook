@@ -13,9 +13,9 @@ import webapp2_extras.json
 #----------
 #    データベースデータのクラス定義
 #----------
-class addressBook( ndb.Model):
-    name_rubi = ndb.StringProperty()
-    name_kanji = ndb.StringProperty()
+class AddressData( ndb.Model):
+    name_rubi = ndb.StringProperty(required=True)
+    name_kanji = ndb.StringProperty(required=True)
     zipcode = ndb.StringProperty(indexed=False)
     address1 = ndb.StringProperty(indexed=False)
     address2 = ndb.StringProperty(indexed=False)
@@ -29,11 +29,18 @@ class AddressBook(webapp2.RequestHandler):
         logging.info( self.request.params )
         logging.info( self.request.get('postvalue'))
         logging.info( self.request.body)
+
         receivedata = self.request.params
         content_body_dict = webapp2_extras.json.decode(self.request.body)
-        content_body_dict['id'] = 215
 
-        obj = addressBook(
+        logging.info(content_body_dict['command'])
+        if content_body_dict['command'] == "add" :
+            self.add(content_body_dict)
+        elif content_body_dict['command'] == "read" :
+            self.read(content_body_dict)
+
+    def add(self,content_body_dict):
+        obj = AddressData(
         name_rubi = content_body_dict['name_rubi'],
         name_kanji= content_body_dict['name_kanji'],
         zipcode   = content_body_dict['zipcode'],
@@ -48,6 +55,23 @@ class AddressBook(webapp2.RequestHandler):
         response = webapp2_extras.json.encode(resp)
         self.response.out.write(response)
 
+    def read(self,content_body_dict):
+        q = AddressData.query()
+        addresses = q.fetch()
+
+        result = []
+        for p in addresses:
+            logging.info(p)
+
+            dic = p.to_dict()
+            key = p.key
+            keyDic = { 'kind':key.kind(), 'id':key.id() }
+            dic['key'] = keyDic
+            result.append(dic)
+
+#        result = [p.to_dict() for p in addresses]
+        response = webapp2_extras.json.encode(result)
+        self.response.out.write(response)
 
 # app  = webapp.WSGIApplication([('/addressbook', AddressBook)], debug=True)
 

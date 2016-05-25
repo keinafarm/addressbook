@@ -9,10 +9,15 @@
 <title>お客様情報管理</title>
 
 </head>
-<body ng-controller="zipCode2Address">
+<body ng-controller="addressBook">
 		<form name="addressbook" class="addressbook"  novalidate>
 			<fieldset>
 				<legend>お客様情報</legend>
+				<div ng-if="records">
+					<button type="button" ng-click="onClickPrev()">◀</button>
+					{{currentRecord+1}}	/ {{records}}
+					<button type="button" ng-click="onClickNext()">▶</button>
+				</div>
 				<p>
 				<label for="name_rubi"><span><sup>＊</sup>フリガナ：</span></label>
 				<input class="name" name="name_rubi" type="text" ng-model="name_rubi" ng-init="name_rubi=''" required />
