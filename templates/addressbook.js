@@ -23,12 +23,7 @@ angular.module('myApp',[] )
               $scope.pref  = "応答受信";
 
               addressBook　= rcvData;
-              $scope.records = rcvData.length;
-              $scope.currentRecord = 0;
-              if ($scope.records > 0)
-              {
-                showAddress();
-              }
+              showAddress();
             })
             // 失敗時の処理（ページにエラーメッセージを反映）
             .error(function(data, status, headers, config){
@@ -62,7 +57,9 @@ angular.module('myApp',[] )
             // 成功時の処理（受信データを表示）
             .success(function(rcvData, status, headers, config){
               $scope.result = rcvData;
-              $scope.pref  = "応答受信";
+              addressBook.push(rcvData);
+              $scope.currentRecord = addressBook.length-1;
+              showAddress();
             })
             // 失敗時の処理（ページにエラーメッセージを反映）
             .error(function(data, status, headers, config){
@@ -86,7 +83,7 @@ angular.module('myApp',[] )
       //
       //  入力内容をクリアする
       //
-      $scope.onClickCLearPerson = function() {
+      $scope.onClickClearPerson = function() {
         $scope.key = "";
         $scope.name_rubi = "";
         $scope.name_kanji = "";
@@ -149,20 +146,30 @@ angular.module('myApp',[] )
       };
 
       function showAddress(){
+        $scope.records = addressBook.length;
         no = $scope.currentRecord;
         if ( addressBook.length <= no )
           no = addressBook.length-1;
         if ( no < 0 )
           no = 0;
-
-        $scope.name_rubi = addressBook[no].name_rubi;
-        $scope.name_kanji = addressBook[no].name_kanji;
-        $scope.zipcode = addressBook[no].zipcode;
-        $scope.address1　= addressBook[no].address1;
-        $scope.address2 = addressBook[no].address2;
-        $scope.telno1 = addressBook[no].telno1;
-        $scope.telno2 = addressBook[no].telno2;
-        $scope.currentRecord = no;
+        if ($scope.records === 0 ) {
+          $scope.name_rubi = "";
+          $scope.name_kanji = "";
+          $scope.zipcode = "";
+          $scope.address1　= "";
+          $scope.address2 = "";
+          $scope.telno1 = "";
+          $scope.telno2 = "";
+        }
+        else {
+          $scope.name_rubi = addressBook[no].name_rubi;
+          $scope.name_kanji = addressBook[no].name_kanji;
+          $scope.zipcode = addressBook[no].zipcode;
+          $scope.address1　= addressBook[no].address1;
+          $scope.address2 = addressBook[no].address2;
+          $scope.telno1 = addressBook[no].telno1;
+          $scope.telno2 = addressBook[no].telno2;
+        }
       }
     }
   ]

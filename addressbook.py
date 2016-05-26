@@ -50,9 +50,15 @@ class AddressBook(webapp2.RequestHandler):
         telno2    = content_body_dict['telno2'],
         )
         key = obj.put()
-        keys = key.pairs()
-        resp = {'key':keys}
-        response = webapp2_extras.json.encode(resp)
+
+        dic = obj.to_dict()
+        key = obj.key
+        keyDic = { 'kind':key.kind(), 'id':key.id() }
+        dic['key'] = keyDic
+
+#        keys = key.pairs()
+#        resp = {'key':keys}
+        response = webapp2_extras.json.encode(dic)
         self.response.out.write(response)
 
     def read(self,content_body_dict):
@@ -69,7 +75,6 @@ class AddressBook(webapp2.RequestHandler):
             dic['key'] = keyDic
             result.append(dic)
 
-#        result = [p.to_dict() for p in addresses]
         response = webapp2_extras.json.encode(result)
         self.response.out.write(response)
 
