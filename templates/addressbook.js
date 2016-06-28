@@ -1,6 +1,6 @@
 angular.module('myApp',[] )
   .controller( 'addressBook',
-  [ '$scope', '$http', function($scope, $http){
+  [ '$scope', '$http', function($scope, $http) {
 
       var addressBook = [];
       $scope.records = 0;
@@ -34,9 +34,23 @@ angular.module('myApp',[] )
       //  表示されている顧客情報を追加する
       //
       $scope.onClickAddPerson = function() {
-        if ($scope.addressbook.$invalid)
-        {
-          $scope.address1 = "データ不正";
+        // エラーフラグをクリアする
+        $scope.name_rubi_error_message = "";
+        $scope.name_rubi_error = false;
+        $scope.name_kanji_error_message = "";
+        $scope.name_kanji_error = false;
+
+        // エラーチェック
+        if ($scope.addressbook.$invalid) {
+          if ($scope.name_rubi === undefined || $scope.name_rubi.length === 0 ) {
+            $scope.name_rubi_error = true;
+            $scope.name_rubi_error_message = "フリガナは必ず入力してください";
+          }
+          if ($scope.name_kanji === undefined || $scope.name_kanji.length === 0 ) {
+            $scope.name_kanji_error = true;
+            $scope.name_kanji_error_message = "氏名は必ず入力してください";
+          }
+          $scope.result = "rubi="+ $scope.name_rubi.length + " kanji=" + $scope.name_kanji.length;
         }
         else {
           // 郵便番号の-はとる

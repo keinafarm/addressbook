@@ -21,10 +21,12 @@
 				<p>
 				<label for="name_rubi"><span><sup>＊</sup>フリガナ：</span></label>
 				<input class="name" name="name_rubi" type="text" ng-model="name_rubi" ng-init="name_rubi=''" required />
+				<span class="error_message" ng-init="name_rubi_error=false" ng-if="name_rubi_error" >{{name_rubi_error_message}}</span>
 				</p>
 				<p>
 				<label for="name_kanji"><span><sup>＊</sup>氏名：</span></label>
 				<input class="name" name="name_kanji" type="text" ng-model="name_kanji" ng-init="name_kanji=''"  required />
+				<span class="error_message" ng-init="name_kanji_error=false" ng-if="name_kanji_error" >{{name_kanji_error_message}}</span>
 			</p>
 			<p>
 				<label for="zipcode"><span>郵便番号：</span></label>
@@ -55,11 +57,21 @@
 		</form>
 		<span><b style="color:#c00">＊</b>は必須項目です。{{result}}</span>
 	<div>{{result}}</div>
+	<p>
+	{{name_rubi_error}}
+	{{name_rubi_error_message}}
+	</p>
+	<p>
+	{{name_kanji_}}
+	{{name_kanji_error_message}}
+	</p>
+
 	<div>
 	{{pref}}
 	{{address}}
 	{{city}}
 	{{town}}
 	{{fullAddress}}
+
 </body>
 </html>

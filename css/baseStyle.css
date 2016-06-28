@@ -33,6 +33,9 @@ form.addressbook p span {
 form.addressbook p span sup {
 	color: #c00;
 }
+.error_message {
+	color: #ff0000;
+}
 form.addressbook p input, select, textarea, button {
 	padding:3px 5px;
 	margin:0px;
