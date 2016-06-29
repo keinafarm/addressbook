@@ -116,6 +116,9 @@ angular.module('myApp',[] )
        *
        */
       $scope.onClickGetAddress = function() {
+        $scope.zipcode_error = false;
+        $scope.zipcode_error_message = "";
+
         // 全角だったら半角に変換
         zipcode = toHalfWidth($scope.zipcode);
         // 郵便番号の正規表現
@@ -123,11 +126,16 @@ angular.module('myApp',[] )
         // 入力されていない時は変換できない
         if ( zipcode.length === 0 ) {
           $scope.result = "郵便番号が入力されていません";
+          $scope.zipcode_error = true;
+          $scope.zipcode_error_message = "郵便番号が入力されていません";
+
           return;
         }
         // nnn-mmmmまたはnnnmmmmのパターンだけを郵便番号とする
         else if ( !reg.test(zipcode) ) {
           $scope.result = "郵便番号が不正です";
+          $scope.zipcode_error = true;
+          $scope.zipcode_error_message = "郵便番号が不正です";
           return;
         }
         // 入力された郵便番号を整形する
@@ -148,10 +156,14 @@ angular.module('myApp',[] )
           }
           else {
             $scope.result = "住所不明";
+            $scope.zipcode_error = true;
+            $scope.zipcode_error_message = "住所不明";
           }
         })
         .error( function(data,status,headers,config ){
           $scope.result = "通信失敗";
+          $scope.zipcode_error = true;
+          $scope.zipcode_error_message = "通信失敗";
         });
       };
       $scope.onClickNext = function() {
