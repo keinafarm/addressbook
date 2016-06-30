@@ -75,15 +75,37 @@ angular.module('myApp',[] )
             // 成功時の処理（受信データを表示）
             .success(function(rcvData, status, headers, config){
               $scope.result = rcvData;
-              addressBook.push(rcvData);
-              $scope.currentRecord = addressBook.length-1;
-              showAddress();
+              $scope.key = rcvData.key.id;
+
+              // DB上のデータをすべて読み込む
+              sendData = JSON.stringify({
+                command:"read",
+              });
+              $http({
+                method: 'POST',
+                url: '/addressbook',
+                data: sendData
+              })	// POSTで送信
+                // 成功時の処理（受信データを表示）
+                .success(function(rcvData, status, headers, config){
+                  $scope.result = rcvData;
+                  $scope.pref  = "応答受信";
+
+                  addressBook　= rcvData;
+                  searchAddressBookByKey($scope.key);
+                  showAddress();
+                })
+                // 失敗時の処理（ページにエラーメッセージを反映）
+                .error(function(data, status, headers, config){
+                  $scope.result = '通信失敗！';
+                });
+
+
             })
             // 失敗時の処理（ページにエラーメッセージを反映）
             .error(function(data, status, headers, config){
               $scope.result = '通信失敗！';
             });
-          $scope.address2 = "onClickAddPerson";
         }
       };
       //
@@ -166,6 +188,10 @@ angular.module('myApp',[] )
           $scope.zipcode_error_message = "通信失敗";
         });
       };
+      /**
+       * 次のレコードを表示する
+       *
+       */
       $scope.onClickNext = function() {
         ++$scope.currentRecord;
         showAddress();
@@ -187,6 +213,8 @@ angular.module('myApp',[] )
           no = addressBook.length-1;
         if ( no < 0 )
           no = 0;
+
+        $scope.currentRecord = no;
         if ($scope.records === 0 ) {
           $scope.name_rubi = "";
           $scope.name_kanji = "";
@@ -208,6 +236,35 @@ angular.module('myApp',[] )
           $scope.telno2 = addressBook[no].telno2;
         }
       }
+      /**
+      *
+      * フリガナで指定された読み仮名のレコードに移動する
+      *
+      */
+      function searchAddressBookByRubi(rubi){
+        $scope.currentRecord = 0;
+        for ( var no=0 ; no < addressBook.length ; ++no ) {
+          if ( addressBook[no].name_rubi == rubi ) {
+            $scope.currentRecord = no;
+            return;
+          }
+        }
+      }
+      /**
+      *
+      * Keyで指定された読み仮名のレコードに移動する
+      *
+      */
+      function searchAddressBookByKey(id){
+        $scope.currentRecord = 0;
+        for ( var no=0 ; no < addressBook.length ; ++no ) {
+          if ( addressBook[no].key.id == id ) {
+            $scope.currentRecord = no;
+            return;
+          }
+        }
+      }
+
     }
   ]
 );

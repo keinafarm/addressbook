@@ -63,7 +63,7 @@ class AddressBook(webapp2.RequestHandler):
 
     def read(self,content_body_dict):
         q = AddressData.query()
-        addresses = q.fetch()
+        addresses = q.order(AddressData.name_rubi).fetch()
 
         result = []
         for p in addresses:
